@@ -19,6 +19,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { TreeTableModule } from 'primeng/treetable';
 import { TreeModule } from 'primeng/tree';
 import { PanelMenuModule } from 'primeng/panelmenu';
+import {PaginatorModule} from 'primeng/paginator';
 
 export const APP_PRIMENG_MODULES = [
 	SharedModule,
@@ -38,5 +39,6 @@ export const APP_PRIMENG_MODULES = [
 	CheckboxModule,
 	TreeTableModule,
 	TreeModule,
-	PanelMenuModule
+	PanelMenuModule,
+	PaginatorModule
 ];

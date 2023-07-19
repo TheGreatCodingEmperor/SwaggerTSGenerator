@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.SpaServices;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.InMemory;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,9 @@ builder.Services.AddSpaStaticFiles(configuration =>
 {
     configuration.RootPath = "ClientApp/dist";
 });
+builder.Services.AddDbContext<DemoContext>(options => 
+    options.UseInMemoryDatabase("demo")
+);
 
 var app = builder.Build();
 
