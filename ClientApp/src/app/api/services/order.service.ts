@@ -30,6 +30,7 @@ export class OrderService extends BaseService {
    */
   apiOrderGet$Plain$Response(
     params?: {
+      name?: string;
       page?: number;
       pageSize?: number;
     },
@@ -37,6 +38,7 @@ export class OrderService extends BaseService {
   ): Observable<StrictHttpResponse<OrderResult>> {
     const rb = new RequestBuilder(this.rootUrl, OrderService.ApiOrderGetPath, 'get');
     if (params) {
+      rb.query('name', params.name, {});
       rb.query('page', params.page, {});
       rb.query('pageSize', params.pageSize, {});
     }
@@ -59,6 +61,7 @@ export class OrderService extends BaseService {
    */
   apiOrderGet$Plain(
     params?: {
+      name?: string;
       page?: number;
       pageSize?: number;
     },
@@ -77,6 +80,7 @@ export class OrderService extends BaseService {
    */
   apiOrderGet$Json$Response(
     params?: {
+      name?: string;
       page?: number;
       pageSize?: number;
     },
@@ -84,6 +88,7 @@ export class OrderService extends BaseService {
   ): Observable<StrictHttpResponse<OrderResult>> {
     const rb = new RequestBuilder(this.rootUrl, OrderService.ApiOrderGetPath, 'get');
     if (params) {
+      rb.query('name', params.name, {});
       rb.query('page', params.page, {});
       rb.query('pageSize', params.pageSize, {});
     }
@@ -106,6 +111,7 @@ export class OrderService extends BaseService {
    */
   apiOrderGet$Json(
     params?: {
+      name?: string;
       page?: number;
       pageSize?: number;
     },

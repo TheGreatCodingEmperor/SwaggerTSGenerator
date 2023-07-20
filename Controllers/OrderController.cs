@@ -21,12 +21,12 @@ public class OrderController : CRUDBaseController<int, Order>
 
     [ProducesResponseType(typeof(OrderResult), StatusCodes.Status200OK)]
     [HttpGet]
-    public virtual async Task<IActionResult> GetAll( int page, int pageSize)
+    public virtual async Task<IActionResult> GetAll(string? name,int page, int pageSize)
     {
         try
         {
             var query = _repositoryHelper.Queryable();
-            // query = query.Where(x => EF.Functions.Like(x.Name,$"%A%"));
+            query = string.IsNullOrEmpty(name)?query: query.Where(x => EF.Functions.Like(x.Name,$"%{name}%"));
             var (count, list) = PaginatorHelper.GetPage<Order>(query, page, pageSize);
             return Ok(new { Count = count, List = list });
         }

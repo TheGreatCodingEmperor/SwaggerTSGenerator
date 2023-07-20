@@ -20,6 +20,7 @@ import { TreeTableModule } from 'primeng/treetable';
 import { TreeModule } from 'primeng/tree';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import {PaginatorModule} from 'primeng/paginator';
+import {InputTextModule} from 'primeng/inputtext';
 
 export const APP_PRIMENG_MODULES = [
 	SharedModule,
@@ -40,5 +41,6 @@ export const APP_PRIMENG_MODULES = [
 	TreeTableModule,
 	TreeModule,
 	PanelMenuModule,
-	PaginatorModule
+	PaginatorModule,
+	InputTextModule
 ];

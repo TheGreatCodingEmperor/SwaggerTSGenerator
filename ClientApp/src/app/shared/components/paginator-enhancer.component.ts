@@ -16,10 +16,9 @@ export class PaginatorEnhancerComponent {
     pageSize:5,
     total:0,
   }
-  @Input() filterConditions: any = {
-    display:{},
-    query:{}
-  };
+  private filterConditions: any = {};
+  @Input() conditions: any = {};
+  @Output() conditionsChange = new EventEmitter();
   // @Input() queryFunction: any;
   @Output() onLoadData: EventEmitter<any> = new EventEmitter<any>();
 
@@ -30,20 +29,22 @@ export class PaginatorEnhancerComponent {
 
   search(){
     // 查詢條件確認
-    this.filterConditions.query = _.cloneDeep(this.filterConditions.display);
+    this.filterConditions = _.cloneDeep(this.conditions);
     this.pageInfo.page = 1;
+    this.paginator.first = 0;
     this.loadDatas();
   }
 
   loadDatas(){
     // 查詢條件未確認，顯示復原為查詢條件
-    this.filterConditions.display = _.cloneDeep(this.filterConditions.query);
+    this.conditions = _.cloneDeep(this.filterConditions);
+    this.conditionsChange.emit(_.cloneDeep(this.conditions));
 
     let request = {};
     // // 頁數
     Object.assign(request,this.pageInfo);
     // // 查詢條件
-    Object.assign(request,this.filterConditions.query);
+    Object.assign(request,this.filterConditions);
     this.onLoadData.emit(request);
   }
 

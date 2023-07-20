@@ -1,4 +1,12 @@
-<paginatorEnhancer (onLoadData)="loadDatas($event)"></paginatorEnhancer>
+<div class="p-inputgroup">
+    <span class="p-inputgroup-addon">Name</span>
+    <input pInputText type="text" [(ngModel)]="conditions.name">
+    <span class="p-inputgroup-addon">
+        <button pButton icon="pi pi-search" (click)="paginator.search()"></button>
+    </span>
+</div>
+<paginatorEnhancer (onLoadData)="loadDatas($event)" [(conditions)]="conditions"></paginatorEnhancer>
+<button pButton icon="pi pi-plus" (click)="onEdit(true)"></button>
 <p-table [value]="datas" [tableStyle]="{'min-width': '50rem'}">
     <ng-template pTemplate="header">
         <tr>
@@ -6,6 +14,7 @@
             <th>Name</th>
             <th>Category</th>
             <th>Quantity</th>
+            <th></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-item>
@@ -14,6 +23,13 @@
             <td>{{item.name}}</td>
             <td>{{item.category}}</td>
             <td>{{item.quantity}}</td>
+            <td>
+                <button pButton icon="pi pi-pencil" (click)="onEdit(false,item)"></button>
+            </td>
         </tr>
     </ng-template>
 </p-table>
+
+<p-dialog [(visible)]="editDialog">
+    
+</p-dialog>

@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { OrderService } from 'src/app/api/services';
 import * as _ from 'lodash';
 import { PaginatorEnhancerComponent } from 'src/app/shared/components/paginator-enhancer.component';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-order',
@@ -10,10 +11,12 @@ import { PaginatorEnhancerComponent } from 'src/app/shared/components/paginator-
 })
 export class OrderComponent implements OnInit, AfterViewInit {
   @ViewChild(PaginatorEnhancerComponent) paginator: PaginatorEnhancerComponent;
+  editDialog = false;
   datas: any[] = [];
+  conditions:any = {};
 
   constructor(
-    private orderService: OrderService
+    public orderService: OrderService
   ) { }
 
   ngOnInit(): void {
@@ -28,5 +31,9 @@ export class OrderComponent implements OnInit, AfterViewInit {
       this.datas = res.body.list;
       this.paginator.pageInfo.total = res.body.count;
     })
+  }
+
+  onEdit(isAdd:boolean,item?:any){
+    let editModel = _.cloneDeep(item);
   }
 }
