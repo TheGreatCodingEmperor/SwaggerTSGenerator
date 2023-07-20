@@ -1,3 +1,4 @@
+<paginatorEnhancer (onLoadData)="loadDatas($event)"></paginatorEnhancer>
 <p-table [value]="datas" [tableStyle]="{'min-width': '50rem'}">
     <ng-template pTemplate="header">
         <tr>
@@ -16,5 +17,3 @@
         </tr>
     </ng-template>
 </p-table>
-<p-paginator [rows]="10" [totalRecords]="pageInfo.total" [rowsPerPageOptions]="[10,20,30]" (onPageChange)="paginate($event)"></p-paginator>
-<button pButton label="loadDatas" (click)="loadDatas()"></button>
