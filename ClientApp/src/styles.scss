@@ -13,4 +13,12 @@ $gutter: 1rem; //for primeflex grid system
 @import "assets/demo/styles/badges.scss";
 @import "assets/demo/styles/code.scss";
 
-@import "assets/layout/styles/theme/bootstrap4-dark-blue/theme.css";
+@import "assets/layout/styles/theme/fluent-light/theme.css";
+
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+// ::ng-deep .p-inputtext .p-inputtext {
+//     border: none;
+//     border-bottom: 1px solid #ccc;
+//     border-radius: 0; /* 可以設定底線的曲率，若不需要可以省略 */
+//   }

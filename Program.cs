@@ -1,18 +1,38 @@
 using Microsoft.AspNetCore.SpaServices;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.InMemory;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddSwaggerGen();
+// .AddNewtonsoftJson(x => {
+//   // My config is Pascal Case
+//   x.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+// })
+// .AddJsonOptions(opt => opt.JsonSerializerOptions.PropertyNamingPolicy = null);
+// .AddNewtonsoftJson(options =>
+// {
+//     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+// });
+builder.Services.AddSwaggerGen(c =>
+{
+    c.DescribeAllParametersInCamelCase();
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Your API", Version = "v1" });
+            c.UseOneOfForPolymorphism();
+});
+// builder.Services.AddSwaggerGenNewtonsoftSupport();
 builder.Services.AddSpaStaticFiles(configuration =>
 {
     configuration.RootPath = "ClientApp/dist";
 });
-builder.Services.AddDbContext<DemoContext>(options => 
+builder.Services.AddDbContext<DemoContext>(options =>
     options.UseInMemoryDatabase("demo")
 );
 

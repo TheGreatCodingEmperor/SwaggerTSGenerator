@@ -33,6 +33,8 @@ export class OrderService extends BaseService {
       name?: string;
       page?: number;
       pageSize?: number;
+      orderBy?: string;
+      orderDesc?: boolean;
     },
     context?: HttpContext
   ): Observable<StrictHttpResponse<OrderResult>> {
@@ -41,6 +43,8 @@ export class OrderService extends BaseService {
       rb.query('name', params.name, {});
       rb.query('page', params.page, {});
       rb.query('pageSize', params.pageSize, {});
+      rb.query('orderBy', params.orderBy, {});
+      rb.query('orderDesc', params.orderDesc, {});
     }
 
     return this.http.request(
@@ -64,6 +68,8 @@ export class OrderService extends BaseService {
       name?: string;
       page?: number;
       pageSize?: number;
+      orderBy?: string;
+      orderDesc?: boolean;
     },
     context?: HttpContext
   ): Observable<OrderResult> {
@@ -83,6 +89,8 @@ export class OrderService extends BaseService {
       name?: string;
       page?: number;
       pageSize?: number;
+      orderBy?: string;
+      orderDesc?: boolean;
     },
     context?: HttpContext
   ): Observable<StrictHttpResponse<OrderResult>> {
@@ -91,6 +99,8 @@ export class OrderService extends BaseService {
       rb.query('name', params.name, {});
       rb.query('page', params.page, {});
       rb.query('pageSize', params.pageSize, {});
+      rb.query('orderBy', params.orderBy, {});
+      rb.query('orderDesc', params.orderDesc, {});
     }
 
     return this.http.request(
@@ -114,6 +124,8 @@ export class OrderService extends BaseService {
       name?: string;
       page?: number;
       pageSize?: number;
+      orderBy?: string;
+      orderDesc?: boolean;
     },
     context?: HttpContext
   ): Observable<OrderResult> {

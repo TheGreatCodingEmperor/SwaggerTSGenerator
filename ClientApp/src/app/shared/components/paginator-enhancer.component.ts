@@ -4,6 +4,11 @@ import { Paginator } from 'primeng/paginator';
 import { Subscription, of } from 'rxjs';
 import * as _ from 'lodash';
 
+enum orderState{
+  asc = 1,
+  desc = 2
+}
+
 @Component({
   selector: 'paginatorEnhancer',
   template:`
@@ -18,6 +23,8 @@ export class PaginatorEnhancerComponent {
   }
   private filterConditions: any = {};
   @Input() conditions: any = {};
+  @Input() orderBy:string = '';
+  orderState = orderState.asc;
   @Output() conditionsChange = new EventEmitter();
   // @Input() queryFunction: any;
   @Output() onLoadData: EventEmitter<any> = new EventEmitter<any>();
@@ -25,7 +32,18 @@ export class PaginatorEnhancerComponent {
   constructor() {
   }
 
-  
+  onOrderBy(field:string){
+    if(this.orderBy == field){
+      if(this.orderState == orderState.asc){
+        this.orderState = orderState.desc;
+      }
+      else{
+        this.orderState = orderState.asc;
+      }
+    }
+    this.orderBy = field;
+    this.loadDatas();
+  }
 
   search(){
     // 查詢條件確認
@@ -40,7 +58,7 @@ export class PaginatorEnhancerComponent {
     this.conditions = _.cloneDeep(this.filterConditions);
     this.conditionsChange.emit(_.cloneDeep(this.conditions));
 
-    let request = {};
+    let request = {orderBy:this.orderBy,orderDesc:this.orderState==orderState.desc};
     // // 頁數
     Object.assign(request,this.pageInfo);
     // // 查詢條件

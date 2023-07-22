@@ -13,7 +13,8 @@ export class OrderComponent implements OnInit, AfterViewInit {
   @ViewChild(PaginatorEnhancerComponent) paginator: PaginatorEnhancerComponent;
   editDialog = false;
   datas: any[] = [];
-  conditions:any = {};
+  conditions: any = {};
+  orderBy = '';
 
   constructor(
     public orderService: OrderService
@@ -23,17 +24,35 @@ export class OrderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.paginator.search(); 
+    this.paginator.search();
   }
 
-  loadDatas(event:any){
+  loadDatas(event: any) {
     this.orderService.apiOrderGet$Json$Response(event).subscribe(res => {
       this.datas = res.body.list;
       this.paginator.pageInfo.total = res.body.count;
     })
   }
+  loading = false;
+  isAdd = false;
+  editModel: any = {};
 
-  onEdit(isAdd:boolean,item?:any){
-    let editModel = _.cloneDeep(item);
+  onEdit(isAdd: boolean, item?: any) {
+    this.isAdd = isAdd;
+    this.editModel = isAdd ? {} : _.cloneDeep(item);
+    this.editDialog = true;
+  }
+
+  save() {
+    this.loading = true; 
+    let action = this.isAdd ? this.orderService.apiOrderPost(this.editModel) : this.orderService.apiOrderPut({ key: this.editModel.id, body: this.editModel });
+    action.subscribe(res => {
+      this.paginator.loadDatas();
+      this.editDialog = false;
+    }).add(() => { this.loading = false });
+  }
+
+  onChange(event){
+    console.log(event.target.value);
   }
 }

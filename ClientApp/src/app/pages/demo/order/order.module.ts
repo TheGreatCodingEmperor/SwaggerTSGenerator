@@ -5,7 +5,7 @@ import { OrderComponent } from './order.component';
 import { APP_PRIMENG_MODULES } from 'src/app/shared/modules/app-primeng-modules';
 import { APP_FORMS_MODULS } from 'src/app/shared/modules/forms-modules';
 import { RouterModule } from '@angular/router';
-import { SharedMasterModule } from 'src/app/shared/modules/shared-master/shared-master.module';
+import { SharedMasterModule } from 'src/app/shared/shared-master.module';
 
 
 @NgModule({

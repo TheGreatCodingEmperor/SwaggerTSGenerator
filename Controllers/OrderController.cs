@@ -2,6 +2,8 @@
 using SwaggerTSGenerator.Helpers;
 using SwaggerTSGenerator.Models.Demo;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using System.Linq.Dynamic.Core;
 
 namespace SwaggerTSGenerator.Controllers;
 
@@ -21,13 +23,14 @@ public class OrderController : CRUDBaseController<int, Order>
 
     [ProducesResponseType(typeof(OrderResult), StatusCodes.Status200OK)]
     [HttpGet]
-    public virtual async Task<IActionResult> GetAll(string? name,int page, int pageSize)
+    public virtual async Task<IActionResult> GetAll([FromQuery]string? Name, [FromQuery] SqlQueryRequestBase reuqest)
     {
         try
         {
             var query = _repositoryHelper.Queryable();
-            query = string.IsNullOrEmpty(name)?query: query.Where(x => EF.Functions.Like(x.Name,$"%{name}%"));
-            var (count, list) = PaginatorHelper.GetPage<Order>(query, page, pageSize);
+            // query = string.IsNullOrEmpty(name) ? query : query.Where(x => EF.Functions.Like(x.Name, $"%{name}%"));
+            query = query.Eq("Name",Name);
+            var (count, list) = query.GetPageInOrder(reuqest);
             return Ok(new { Count = count, List = list });
         }
         catch (Exception ex)

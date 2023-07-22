@@ -5,15 +5,15 @@
         <button pButton icon="pi pi-search" (click)="paginator.search()"></button>
     </span>
 </div>
-<paginatorEnhancer (onLoadData)="loadDatas($event)" [(conditions)]="conditions"></paginatorEnhancer>
+<paginatorEnhancer #paginator (onLoadData)="loadDatas($event)" [orderBy]="orderBy" [(conditions)]="conditions"></paginatorEnhancer>
 <button pButton icon="pi pi-plus" (click)="onEdit(true)"></button>
 <p-table [value]="datas" [tableStyle]="{'min-width': '50rem'}">
     <ng-template pTemplate="header">
         <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Quantity</th>
+            <th (click)="paginator.onOrderBy('id')">Id</th>
+            <th (click)="paginator.onOrderBy('name')">Name</th>
+            <th (click)="paginator.onOrderBy('price')">Price</th>
+            <th (click)="paginator.onOrderBy('count')">Count</th>
             <th></th>
         </tr>
     </ng-template>
@@ -21,8 +21,8 @@
         <tr>
             <td>{{item.id}}</td>
             <td>{{item.name}}</td>
-            <td>{{item.category}}</td>
-            <td>{{item.quantity}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.count}}</td>
             <td>
                 <button pButton icon="pi pi-pencil" (click)="onEdit(false,item)"></button>
             </td>
@@ -31,5 +31,21 @@
 </p-table>
 
 <p-dialog [(visible)]="editDialog">
-    
+    <table style="width:100%;" class="p-fluid table table-bordered">
+        <tr>
+            <td>
+                <div style="margin-right: .5rem;">Name</div>
+            </td>
+            <td>
+                <textbox [(ngModel)]="editModel.name" [inputProps]="[{ style: 'color:red;', disabled:false,events:{keyup: onChange,} }]"></textbox>
+            </td>
+            <td><div style="margin-right: .5rem;">Count</div></td>
+            <td>
+                <textbox [(ngModel)]="editModel.count" [inputProps]="[{ style: 'color:red;', disabled:false,events:{keyup: onChange,} }]"></textbox>
+            </td>
+        </tr>
+    </table>
+    <ng-template pTemplate="footer">
+        <button pButton icon="pi pi-save" (click)="save()"></button>
+    </ng-template>
 </p-dialog>
