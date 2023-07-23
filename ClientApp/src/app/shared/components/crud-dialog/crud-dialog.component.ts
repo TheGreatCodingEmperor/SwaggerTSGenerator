@@ -24,4 +24,8 @@ export class CrudDialogComponent {
   save(){
     this.onSave.emit(this.isAdd);
   }
+  cancel(){
+    this.visibleChange.emit(false);
+    this.editModelChange.emit({});
+  }
 }

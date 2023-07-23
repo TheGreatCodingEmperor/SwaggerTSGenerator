@@ -21,6 +21,8 @@ import { TreeModule } from 'primeng/tree';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import {PaginatorModule} from 'primeng/paginator';
 import {InputTextModule} from 'primeng/inputtext';
+import {ToastModule} from 'primeng/toast';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
 
 export const APP_PRIMENG_MODULES = [
 	SharedModule,
@@ -42,5 +44,7 @@ export const APP_PRIMENG_MODULES = [
 	TreeModule,
 	PanelMenuModule,
 	PaginatorModule,
-	InputTextModule
+	InputTextModule,
+	ToastModule,
+	ConfirmPopupModule
 ];

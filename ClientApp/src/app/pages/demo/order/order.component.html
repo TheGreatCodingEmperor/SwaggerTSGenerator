@@ -7,11 +7,13 @@
     <input pInputText [(ngModel)]="conditions.priceMax">
     <span class="p-inputgroup-addon">
         <button pButton icon="pi pi-search" (click)="paginator.search()"></button>
+        <button pButton icon="pi pi-times" (click)="clearConditions()"></button>
+        <button pButton icon="pi pi-plus" (click)="dialog.onEdit(true)"></button>
     </span>
 </div>
 
+<p-confirmPopup></p-confirmPopup>
 <paginatorEnhancer #paginator (onLoadData)="loadDatas($event)" [(conditions)]="conditions"></paginatorEnhancer>
-<button pButton icon="pi pi-plus" (click)="dialog.onEdit(true)"></button>
 <p-table [value]="datas" [tableStyle]="{'min-width': '50rem'}">
     <ng-template pTemplate="header">
         <tr>
@@ -30,6 +32,7 @@
             <td>{{item.count}}</td>
             <td>
                 <button pButton icon="pi pi-pencil" (click)="dialog.onEdit(false,item)"></button>
+                <button pButton icon="pi pi-trash" (click)="delete(item)"></button>
             </td>
         </tr>
     </ng-template>

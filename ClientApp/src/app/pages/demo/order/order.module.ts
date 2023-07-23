@@ -6,6 +6,7 @@ import { APP_PRIMENG_MODULES } from 'src/app/shared/modules/app-primeng-modules'
 import { APP_FORMS_MODULS } from 'src/app/shared/modules/forms-modules';
 import { RouterModule } from '@angular/router';
 import { SharedMasterModule } from 'src/app/shared/shared-master.module';
+import {MessageService} from 'primeng/api';
 
 
 @NgModule({
@@ -19,6 +20,9 @@ import { SharedMasterModule } from 'src/app/shared/shared-master.module';
     RouterModule.forChild([
       { path:'',component:OrderComponent }
     ])
+  ],
+  providers:[
+    MessageService
   ]
 })
 export class OrderModule { }
