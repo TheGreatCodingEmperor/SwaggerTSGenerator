@@ -61,34 +61,6 @@ $gutter: 1rem; //for primeflex grid system
     }
 }
 
-.ty-input-group {
-    display: flex;
-    align-items: center;
-
-    span {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px 0 0 4px;
-        flex: 1;
-    }
-
-    input {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px 0 0 4px;
-        flex: 1;
-    }
-
-    /* 設定 button 元素的樣式 */
-    // button {
-    //     padding: 10px 20px;
-    //     background-color: #007bff;
-    //     color: white;
-    //     border: none;
-    //     border-radius: 0 4px 4px 0;
-    // }
-}
-
 @media screen and (max-width: 960px) {
     .p-inputgroup {
         flex-direction: column;
@@ -98,10 +70,9 @@ $gutter: 1rem; //for primeflex grid system
         }
     }
 
-    .input-group button {
-        margin-left: 0;
-        /* 將按鈕的左側間距設為0，使按鈕居中 */
-        margin-top: 10px;
-        /* 垂直間距 */
+    .ty-form{
+        th,td{
+            display: block;
+        }
     }
 }
