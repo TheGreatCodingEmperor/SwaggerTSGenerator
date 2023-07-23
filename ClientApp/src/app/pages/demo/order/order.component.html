@@ -14,7 +14,7 @@
 
 <p-confirmPopup></p-confirmPopup>
 <paginatorEnhancer #paginator (onLoadData)="loadDatas($event)" [(conditions)]="conditions"></paginatorEnhancer>
-<p-table [value]="datas" [tableStyle]="{'min-width': '50rem'}">
+<p-table responsiveLayout="stack" [value]="datas">
     <ng-template pTemplate="header">
         <tr>
             <th (click)="paginator.onOrderBy('id')">Id</th>
@@ -26,10 +26,10 @@
     </ng-template>
     <ng-template pTemplate="body" let-item>
         <tr>
-            <td>{{item.id}}</td>
-            <td>{{item.name}}</td>
-            <td>{{item.price}}</td>
-            <td>{{item.count}}</td>
+            <td><span class="p-column-title">Id</span>{{item.id}}</td>
+            <td><span class="p-column-title">Name</span>{{item.name}}</td>
+            <td><span class="p-column-title">Price</span>{{item.price}}</td>
+            <td><span class="p-column-title">Count</span>{{item.count}}</td>
             <td>
                 <button pButton icon="pi pi-pencil" (click)="dialog.onEdit(false,item)"></button>
                 <button pButton icon="pi pi-trash" (click)="delete(item)"></button>
