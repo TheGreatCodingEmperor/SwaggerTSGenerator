@@ -1,17 +1,25 @@
-import { Directive, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, Renderer2, ViewChild } from '@angular/core';
 
 @Directive({
   selector: '[propJson]'
 })
-export class PropJsonDirective {
+export class PropJsonDirective implements OnChanges {
   @Input('propJson') inputProps: any[] = [];
 
   constructor(private el: ElementRef, private renderer: Renderer2) { }
 
+  ngOnChanges() {
+    this.loadProps();
+  }
+
   ngAfterViewInit() {
-    let inputProps:any = {};
-    for(let props of this.inputProps){
-      inputProps = Object.assign(inputProps,props);
+    this.loadProps();
+  }
+
+  loadProps() {
+    let inputProps: any = {};
+    for (let props of this.inputProps) {
+      inputProps = Object.assign(inputProps, props);
     }
     this.el.nativeElement.style = inputProps.style;
     this.el.nativeElement.class = inputProps.class;
@@ -25,15 +33,6 @@ export class PropJsonDirective {
           value(event);
         });
       });
-      // for (let eve in this.inputProps.events) {
-      //   console.log(eve);
-      //   console.log(this.inputProps[eve]);
-      //   // 添加change事件
-      //   this.inputElement.nativeElement.addEventListener(eve, (event) => {
-      //     // 在這裡處理change事件
-      //     this.inputProps.change(event);
-      //   });
-      // }
     }
   }
 }

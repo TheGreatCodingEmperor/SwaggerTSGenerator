@@ -16,7 +16,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class TextboxComponent implements ControlValueAccessor {
   @ViewChild('inputElement') inputElement: ElementRef;
-  @Input() inputProps: any[] = [];
+  @Input() propJson:any[] = [];
+  // @Input() inputProps: any[] = [];
   value: any;
   disabled: boolean;
 

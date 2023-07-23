@@ -4,6 +4,7 @@ import { PaginatorEnhancerComponent } from './components/paginator-enhancer.comp
 import { APP_PRIMENG_MODULES } from './modules/app-primeng-modules';
 import { TextboxComponent } from './components/form-field/textbox/textbox.component';
 import { PropJsonDirective } from './directives/prop-json.directive';
+import { CrudDialogComponent } from './components/crud-dialog/crud-dialog.component';
 
 
 
@@ -12,7 +13,8 @@ import { PropJsonDirective } from './directives/prop-json.directive';
     PaginatorEnhancerComponent,
 
     TextboxComponent,
-    PropJsonDirective
+    PropJsonDirective,
+    CrudDialogComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { PropJsonDirective } from './directives/prop-json.directive';
     PaginatorEnhancerComponent,
 
     TextboxComponent,
-    PropJsonDirective
+    PropJsonDirective,
+    CrudDialogComponent
   ]
 })
 export class SharedMasterModule { }

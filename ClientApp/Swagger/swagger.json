@@ -19,6 +19,22 @@
             }
           },
           {
+            "name": "priceMax",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "priceMin",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "schema": {
@@ -218,10 +234,12 @@
           },
           "price": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "count": {
-            "type": "string",
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         },

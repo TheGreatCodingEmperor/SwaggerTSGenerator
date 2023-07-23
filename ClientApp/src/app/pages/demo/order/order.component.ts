@@ -3,6 +3,7 @@ import { OrderService } from 'src/app/api/services';
 import * as _ from 'lodash';
 import { PaginatorEnhancerComponent } from 'src/app/shared/components/paginator-enhancer.component';
 import { NgForm } from '@angular/forms';
+import { CrudDialogComponent } from 'src/app/shared/components/crud-dialog/crud-dialog.component';
 
 @Component({
   selector: 'app-order',
@@ -11,10 +12,14 @@ import { NgForm } from '@angular/forms';
 })
 export class OrderComponent implements OnInit, AfterViewInit {
   @ViewChild(PaginatorEnhancerComponent) paginator: PaginatorEnhancerComponent;
+  @ViewChild(CrudDialogComponent) dialog: CrudDialogComponent;
   editDialog = false;
+  loading = false;
+  editModel:any = {};
   datas: any[] = [];
   conditions: any = {};
-  orderBy = '';
+
+  formfieldBasicProps = { style: 'color:red;', disabled: false, events: { keyup: this.onChange } };
 
   constructor(
     public orderService: OrderService
@@ -33,26 +38,17 @@ export class OrderComponent implements OnInit, AfterViewInit {
       this.paginator.pageInfo.total = res.body.count;
     })
   }
-  loading = false;
-  isAdd = false;
-  editModel: any = {};
 
-  onEdit(isAdd: boolean, item?: any) {
-    this.isAdd = isAdd;
-    this.editModel = isAdd ? {} : _.cloneDeep(item);
-    this.editDialog = true;
-  }
-
-  save() {
-    this.loading = true; 
-    let action = this.isAdd ? this.orderService.apiOrderPost(this.editModel) : this.orderService.apiOrderPut({ key: this.editModel.id, body: this.editModel });
+  save(isAdd:boolean) {
+    this.loading = true;
+    let action = isAdd ? this.orderService.apiOrderPost({body:this.editModel}) : this.orderService.apiOrderPut({ key: this.editModel.id, body: this.editModel });
     action.subscribe(res => {
       this.paginator.loadDatas();
       this.editDialog = false;
     }).add(() => { this.loading = false });
   }
 
-  onChange(event){
+  onChange(event) {
     console.log(event.target.value);
   }
 }

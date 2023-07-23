@@ -23,13 +23,13 @@ public class OrderController : CRUDBaseController<int, Order>
 
     [ProducesResponseType(typeof(OrderResult), StatusCodes.Status200OK)]
     [HttpGet]
-    public virtual async Task<IActionResult> GetAll([FromQuery]string? Name, [FromQuery] SqlQueryRequestBase reuqest)
+    public virtual async Task<IActionResult> GetAll([FromQuery]string? Name,[FromQuery]int? PriceMax,[FromQuery]int? PriceMin, [FromQuery] SqlQueryRequestBase reuqest)
     {
         try
         {
             var query = _repositoryHelper.Queryable();
             // query = string.IsNullOrEmpty(name) ? query : query.Where(x => EF.Functions.Like(x.Name, $"%{name}%"));
-            query = query.Eq("Name",Name);
+            query = query.StartWith("Name",Name).Between("Price",PriceMax,PriceMin);
             var (count, list) = query.GetPageInOrder(reuqest);
             return Ok(new { Count = count, List = list });
         }

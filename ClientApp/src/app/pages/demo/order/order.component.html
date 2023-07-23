@@ -1,12 +1,17 @@
 <div class="p-inputgroup">
     <span class="p-inputgroup-addon">Name</span>
-    <input pInputText type="text" [(ngModel)]="conditions.name">
+    <input pInputText [(ngModel)]="conditions.name">
+    <span class="p-inputgroup-addon">Price</span>
+    <input pInputText [(ngModel)]="conditions.priceMin">
+    <span class="p-inputgroup-addon">~</span>
+    <input pInputText [(ngModel)]="conditions.priceMax">
     <span class="p-inputgroup-addon">
         <button pButton icon="pi pi-search" (click)="paginator.search()"></button>
     </span>
 </div>
-<paginatorEnhancer #paginator (onLoadData)="loadDatas($event)" [orderBy]="orderBy" [(conditions)]="conditions"></paginatorEnhancer>
-<button pButton icon="pi pi-plus" (click)="onEdit(true)"></button>
+
+<paginatorEnhancer #paginator (onLoadData)="loadDatas($event)" [(conditions)]="conditions"></paginatorEnhancer>
+<button pButton icon="pi pi-plus" (click)="dialog.onEdit(true)"></button>
 <p-table [value]="datas" [tableStyle]="{'min-width': '50rem'}">
     <ng-template pTemplate="header">
         <tr>
@@ -24,28 +29,36 @@
             <td>{{item.price}}</td>
             <td>{{item.count}}</td>
             <td>
-                <button pButton icon="pi pi-pencil" (click)="onEdit(false,item)"></button>
+                <button pButton icon="pi pi-pencil" (click)="dialog.onEdit(false,item)"></button>
             </td>
         </tr>
     </ng-template>
 </p-table>
 
-<p-dialog [(visible)]="editDialog">
-    <table style="width:100%;" class="p-fluid table table-bordered">
-        <tr>
-            <td>
-                <div style="margin-right: .5rem;">Name</div>
-            </td>
-            <td>
-                <textbox [(ngModel)]="editModel.name" [inputProps]="[{ style: 'color:red;', disabled:false,events:{keyup: onChange,} }]"></textbox>
-            </td>
-            <td><div style="margin-right: .5rem;">Count</div></td>
-            <td>
-                <textbox [(ngModel)]="editModel.count" [inputProps]="[{ style: 'color:red;', disabled:false,events:{keyup: onChange,} }]"></textbox>
-            </td>
-        </tr>
-    </table>
-    <ng-template pTemplate="footer">
-        <button pButton icon="pi pi-save" (click)="save()"></button>
-    </ng-template>
-</p-dialog>
+<crud-dialog #dialog [(visible)]="editDialog" [(editModel)]="editModel" (onSave)="save($event)">
+    <tr>
+        <th colspan="5" align="center" class="bg-primary">
+            Order
+        </th>
+    </tr>
+    <tr>
+        <td class="label">
+            <div>Name</div>
+        </td>
+        <td>
+            <input [(ngModel)]="editModel.name">
+        </td>
+        <td class="label">
+            <div>Count</div>
+        </td>
+        <td>
+            <input type="number" [(ngModel)]="editModel.count">
+        </td>
+    </tr>
+    <tr>
+        <td class="label">Price</td>
+        <td>
+            <input [(ngModel)]="editModel.price">
+        </td>
+    </tr>
+</crud-dialog>

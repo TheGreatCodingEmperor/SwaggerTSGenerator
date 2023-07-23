@@ -15,10 +15,93 @@ $gutter: 1rem; //for primeflex grid system
 
 @import "assets/layout/styles/theme/fluent-light/theme.css";
 
-@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
-// ::ng-deep .p-inputtext .p-inputtext {
-//     border: none;
-//     border-bottom: 1px solid #ccc;
-//     border-radius: 0; /* 可以設定底線的曲率，若不需要可以省略 */
-//   }
+// global styles.scss
+
+.ty-form {
+    table {
+        border-collapse: collapse;
+        width: 400px;
+        margin: 0 auto;
+
+        th,
+        td {
+            padding: 8px;
+            border: 1px solid #ccc;
+            /* 加入底線 */
+        }
+
+        .label {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            border: none;
+            /* 移除原來的邊框 */
+            border-bottom: 1px solid #ccc;
+            /* 加入底線 */
+            box-sizing: border-box;
+            background-color: transparent;
+            /* 背景透明 */
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px #007bff;
+        }
+    }
+}
+
+.ty-input-group {
+    display: flex;
+    align-items: center;
+
+    span {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px 0 0 4px;
+        flex: 1;
+    }
+
+    input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px 0 0 4px;
+        flex: 1;
+    }
+
+    /* 設定 button 元素的樣式 */
+    // button {
+    //     padding: 10px 20px;
+    //     background-color: #007bff;
+    //     color: white;
+    //     border: none;
+    //     border-radius: 0 4px 4px 0;
+    // }
+}
+
+@media screen and (max-width: 960px) {
+    .p-inputgroup {
+        flex-direction: column;
+        /* 將元素排列改為垂直方向 */
+        input {
+            width:100% !important;
+        }
+    }
+
+    .input-group button {
+        margin-left: 0;
+        /* 將按鈕的左側間距設為0，使按鈕居中 */
+        margin-top: 10px;
+        /* 垂直間距 */
+    }
+}

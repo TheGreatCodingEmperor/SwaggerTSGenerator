@@ -1,0 +1,10 @@
+<p-dialog [visible]="visible" (visibleChange)="visibleChange.emit($event)" [modal]="true">
+    <div class="ty-form">
+        <table style="width:100%;" class="p-fluid">
+            <ng-content></ng-content>
+        </table>
+    </div>
+    <ng-template pTemplate="footer">
+        <button pButton icon="pi pi-save" label="Save" (click)="save()"></button>
+    </ng-template>
+</p-dialog>

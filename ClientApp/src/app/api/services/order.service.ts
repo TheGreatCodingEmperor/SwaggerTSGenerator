@@ -31,6 +31,8 @@ export class OrderService extends BaseService {
   apiOrderGet$Plain$Response(
     params?: {
       name?: string;
+      priceMax?: number;
+      priceMin?: number;
       page?: number;
       pageSize?: number;
       orderBy?: string;
@@ -41,6 +43,8 @@ export class OrderService extends BaseService {
     const rb = new RequestBuilder(this.rootUrl, OrderService.ApiOrderGetPath, 'get');
     if (params) {
       rb.query('name', params.name, {});
+      rb.query('priceMax', params.priceMax, {});
+      rb.query('priceMin', params.priceMin, {});
       rb.query('page', params.page, {});
       rb.query('pageSize', params.pageSize, {});
       rb.query('orderBy', params.orderBy, {});
@@ -66,6 +70,8 @@ export class OrderService extends BaseService {
   apiOrderGet$Plain(
     params?: {
       name?: string;
+      priceMax?: number;
+      priceMin?: number;
       page?: number;
       pageSize?: number;
       orderBy?: string;
@@ -87,6 +93,8 @@ export class OrderService extends BaseService {
   apiOrderGet$Json$Response(
     params?: {
       name?: string;
+      priceMax?: number;
+      priceMin?: number;
       page?: number;
       pageSize?: number;
       orderBy?: string;
@@ -97,6 +105,8 @@ export class OrderService extends BaseService {
     const rb = new RequestBuilder(this.rootUrl, OrderService.ApiOrderGetPath, 'get');
     if (params) {
       rb.query('name', params.name, {});
+      rb.query('priceMax', params.priceMax, {});
+      rb.query('priceMin', params.priceMin, {});
       rb.query('page', params.page, {});
       rb.query('pageSize', params.pageSize, {});
       rb.query('orderBy', params.orderBy, {});
@@ -122,6 +132,8 @@ export class OrderService extends BaseService {
   apiOrderGet$Json(
     params?: {
       name?: string;
+      priceMax?: number;
+      priceMin?: number;
       page?: number;
       pageSize?: number;
       orderBy?: string;

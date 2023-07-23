@@ -17,6 +17,10 @@ public static class SqlQueryHelper
     {
         return value == null ? queryable : queryable.Where($"{field}.Contains(@0)", value);
     }
+    public static IQueryable<T> StartWith<T>(this IQueryable<T> queryable, string field, object? value)
+    {
+        return value == null ? queryable : queryable.Where($"{field}.StartsWith(@0, StringComparison.OrdinalIgnoreCase)", value);
+    }
     public static IQueryable<T> Lg<T>(this IQueryable<T> queryable, string field, object? value)
     {
         queryable = value == null ? queryable : queryable.Where($"{field} > @0", value);
