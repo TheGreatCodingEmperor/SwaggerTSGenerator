@@ -86,4 +86,8 @@ export class OrderComponent implements OnInit, AfterViewInit {
         this.loading = false
       });
   }
+
+  show(){
+    console.log('hello');
+  }
 }

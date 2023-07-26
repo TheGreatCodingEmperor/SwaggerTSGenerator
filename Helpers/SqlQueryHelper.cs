@@ -43,8 +43,8 @@ public static class SqlQueryHelper
     }
     public static IQueryable<T> Between<T>(this IQueryable<T> queryable, string field, object? valueMax, object? valueMin)
     {
-        queryable = valueMin == null ? queryable : queryable.Where($"{field} <= @0", valueMax);
-        queryable = valueMax == null ? queryable : queryable.Where($"{field} >= @0", valueMin);
+        queryable = valueMax == null ? queryable : queryable.Where($"{field} <= @0", valueMax);
+        queryable = valueMin == null ? queryable : queryable.Where($"{field} >= @0", valueMin);
         return queryable;
     }
 

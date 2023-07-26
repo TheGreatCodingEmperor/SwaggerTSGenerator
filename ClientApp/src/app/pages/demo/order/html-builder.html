@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Monaco Editor Example with Bootstrap</title>
+    <!-- 加入 Bootstrap 的 CSS 樣式 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row mt-4">
+            <!-- 上面的 Monaco Editor -->
+            <div class="col-lg-12">
+                <h4>上面的 Monaco Editor</h4>
+                <div id="editor1" style="height: 400px;"></div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <!-- 按鈕 -->
+            <div class="col-lg-12 text-center">
+                <button class="btn btn-primary" onclick="copyContentUpper()">複製原始js</button>
+                <button class="btn btn-primary" onclick="copyContent()">產生 template</button>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <!-- 下面的 Monaco Editor -->
+            <div class="col-lg-12">
+                <h4>下面的 Monaco Editor</h4>
+                <div id="editor2" style="height: 400px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加入 Monaco Editor 的 CDN 連結 -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.26.1/min/vs/loader.js"></script>
+    <script src="./generatorJs/basic-html-generator.js"></script>
+    <script src="./generatorJs/primeng-html-generator.js"></script>
+    <script>
+        // 初始化 Monaco Editor
+        require.config({
+            paths: {
+                'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.26.1/min/vs'
+            }
+        });
+        window.MonacoEnvironment = {
+            getWorkerUrl: () => proxy
+        };
+
+        let editor1, editor2;
+        // 載入 Monaco Editor
+        require(['vs/editor/editor.main'], function () {
+            editor1 = monaco.editor.create(document.getElementById('editor1'), {
+                value: '在這裡輸入上面的內容...',
+                language: 'javascript'
+            });
+
+            editor2 = monaco.editor.create(document.getElementById('editor2'), {
+                value: '這裡會顯示上面的內容...',
+                language: 'javascript'
+            });
+        });
+
+
+        // 將內容複製到剪貼簿
+        function copyToClipboard(content) {
+            var textarea = document.createElement('textarea');
+            textarea.value = content;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('已複製到剪貼簿：\n' + content);
+        }
+
+        function copyContentUpper() {
+            var content = editor1.getValue();
+            copyToClipboard(content);
+        }
+
+        // 按下按鈕時複製上面的內容到下面的 Monaco Editor
+        function copyContent() {
+            var content = editor1.getValue();
+            let html = eval(content);
+            editor2.setValue(html);
+
+            copyToClipboard(html);
+        }
+
+    </script>
+</body>
+
+</html>
